@@ -1,0 +1,67 @@
+# TechStore — Компьютерный магазин
+
+Учебный веб-проект на Flask + SQLite.
+
+## Стек технологий
+- **Frontend**: HTML5 + CSS3
+- **Backend**: Python 3 + Flask
+- **База данных**: SQLite (встроен в Python, не нужно ничего устанавливать)
+
+## Установка и запуск
+
+### 1. Установить зависимости
+```bash
+pip install flask
+```
+или
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Запустить приложение
+```bash
+python app.py
+```
+
+### 3. Открыть в браузере
+```
+http://127.0.0.1:5000
+```
+
+## Страницы сайта
+
+| URL | Описание |
+|-----|----------|
+| `/` | Каталог товаров (поиск + фильтр по категориям) |
+| `/product/<id>` | Карточка товара |
+| `/order/<id>` | Форма оформления заказа |
+| `/admin` | Панель заказов и статистика |
+
+## Структура проекта
+
+```
+techstore/
+├── app.py              # Основной файл Flask + маршруты + SQLite
+├── store.db            # База данных (создаётся автоматически)
+├── requirements.txt    # Зависимости
+├── templates/
+│   ├── base.html       # Базовый шаблон (шапка, логотип, футер)
+│   ├── index.html      # Каталог товаров
+│   ├── product.html    # Страница товара
+│   ├── order.html      # Форма заказа
+│   ├── success.html    # Подтверждение заказа
+│   └── admin.html      # Панель администратора
+└── static/
+    ├── css/style.css   # Стили
+    └── js/main.js      # JavaScript
+```
+
+## База данных (SQLite)
+
+**Таблица `products`** — товары:
+- id, name, category, price, description, stock, image_url
+
+**Таблица `orders`** — заказы:
+- id, customer_name, customer_email, product_id, quantity, total_price, created_at
+
+При первом запуске база данных создаётся автоматически и заполняется 10 тестовыми товарами.
