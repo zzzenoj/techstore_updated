@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Заказ — {{ product['name'] }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="breadcrumb">
+        <a href="/">← Каталог</a> / <a href="/product/{{ product['id'] }}">{{ product['name'] }}</a> / Заказ
+    </div>
+
+    <div class="order-wrapper">
+        <div class="order-summary">
+            <h3>Ваш заказ</h3>
+            <div class="order-product">
+                <div class="order-icon">
+                    {% if product['image_url'] == 'laptop' %}💻
+                    {% elif product['image_url'] == 'desktop' %}🖥️
+                    {% elif product['image_url'] == 'monitor' %}🖥
+                    {% elif product['image_url'] == 'keyboard' %}⌨️
+                    {% elif product['image_url'] == 'mouse' %}🖱️
+                    {% elif product['image_url'] == 'ssd' %}💾
+                    {% elif product['image_url'] == 'gpu' %}🎮
+                    {% elif product['image_url'] == 'headphones' %}🎧
+                    {% else %}📦
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="order-product-name">{{ product['name'] }}</div>
+                    <div class="order-product-price">{{ '{:,.0f}'.format(product['price']).replace(',', ' ') }} ₽ / шт.</div>
+                </div>
+            </div>
+            <div class="order-total-preview" id="total-preview">
+                Итого: <strong>{{ '{:,.0f}'.format(product['price']).replace(',', ' ') }} ₽</strong>
+            </div>
+        </div>
+
+        <form class="order-form" method="post">
+            <h2>Оформление заказа</h2>
+            <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="ivan@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Количество (макс. {{ product['stock'] }})</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="{{ product['stock'] }}" value="1"
+                    data-price="{{ product['price'] }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large">Подтвердить заказ</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

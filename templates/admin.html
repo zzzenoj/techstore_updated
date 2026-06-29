@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Панель заказов — TechStore{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Панель заказов</h1>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-value">{{ stats['total_orders'] or 0 }}</div>
+            <div class="stat-label">Всего заказов</div>
+        </div>
+        <div class="stat-card accent">
+            <div class="stat-value">{{ '{:,.0f}'.format(stats['revenue'] or 0).replace(',', ' ') }} ₽</div>
+            <div class="stat-label">Общая выручка</div>
+        </div>
+    </div>
+
+    {% if orders %}
+    <div class="table-wrapper">
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Клиент</th>
+                    <th>Email</th>
+                    <th>Товар</th>
+                    <th>Кол-во</th>
+                    <th>Сумма</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    <td>{{ o['id'] }}</td>
+                    <td>{{ o['customer_name'] }}</td>
+                    <td>{{ o['customer_email'] }}</td>
+                    <td>{{ o['product_name'] }}</td>
+                    <td>{{ o['quantity'] }}</td>
+                    <td>{{ '{:,.0f}'.format(o['total_price']).replace(',', ' ') }} ₽</td>
+                    <td>{{ o['created_at'][:16] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <h3>Заказов пока нет</h3>
+        <p>Здесь будут отображаться все оформленные заказы</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

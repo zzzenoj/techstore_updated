@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TechStore{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Monitor shape -->
+                    <rect x="4" y="6" width="40" height="27" rx="3" fill="none" stroke="url(#grad)" stroke-width="2.5"/>
+                    <rect x="16" y="33" width="16" height="4" fill="url(#grad)"/>
+                    <rect x="12" y="37" width="24" height="2.5" rx="1.2" fill="url(#grad)"/>
+                    <!-- Screen content lines -->
+                    <rect x="10" y="12" width="12" height="2" rx="1" fill="#38bdf8" opacity="0.7"/>
+                    <rect x="10" y="17" width="18" height="2" rx="1" fill="#38bdf8" opacity="0.4"/>
+                    <rect x="10" y="22" width="14" height="2" rx="1" fill="#38bdf8" opacity="0.4"/>
+                    <!-- Chip icon -->
+                    <rect x="28" y="13" width="12" height="12" rx="2" fill="url(#grad2)" opacity="0.9"/>
+                    <rect x="31" y="16" width="6" height="6" rx="1" fill="#0f172a"/>
+                    <!-- Chip pins -->
+                    <line x1="30" y1="11" x2="30" y2="13" stroke="#38bdf8" stroke-width="1.2"/>
+                    <line x1="34" y1="11" x2="34" y2="13" stroke="#38bdf8" stroke-width="1.2"/>
+                    <line x1="38" y1="11" x2="38" y2="13" stroke="#38bdf8" stroke-width="1.2"/>
+                    <line x1="30" y1="25" x2="30" y2="27" stroke="#38bdf8" stroke-width="1.2"/>
+                    <line x1="34" y1="25" x2="34" y2="27" stroke="#38bdf8" stroke-width="1.2"/>
+                    <line x1="38" y1="25" x2="38" y2="27" stroke="#38bdf8" stroke-width="1.2"/>
+                    <defs>
+                        <linearGradient id="grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#38bdf8"/>
+                            <stop offset="1" stop-color="#6366f1"/>
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="28" y1="13" x2="40" y2="25" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#6366f1"/>
+                            <stop offset="1" stop-color="#38bdf8"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Tech<span class="logo-accent">Store</span></span>
+            </a>
+            <nav class="nav">
+                <a href="/" class="nav-link">Каталог</a>
+                <a href="/admin" class="nav-link">Заказы</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-top">
+            <div class="footer-col footer-brand">
+                <a href="/" class="logo footer-logo">
+                    <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="4" y="6" width="40" height="27" rx="3" fill="none" stroke="url(#fgrad)" stroke-width="2.5"/>
+                        <rect x="16" y="33" width="16" height="4" fill="url(#fgrad)"/>
+                        <rect x="12" y="37" width="24" height="2.5" rx="1.2" fill="url(#fgrad)"/>
+                        <rect x="10" y="12" width="12" height="2" rx="1" fill="#38bdf8" opacity="0.7"/>
+                        <rect x="10" y="17" width="18" height="2" rx="1" fill="#38bdf8" opacity="0.4"/>
+                        <rect x="10" y="22" width="14" height="2" rx="1" fill="#38bdf8" opacity="0.4"/>
+                        <rect x="28" y="13" width="12" height="12" rx="2" fill="url(#fgrad2)" opacity="0.9"/>
+                        <rect x="31" y="16" width="6" height="6" rx="1" fill="#0f172a"/>
+                        <defs>
+                            <linearGradient id="fgrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38bdf8"/>
+                                <stop offset="1" stop-color="#6366f1"/>
+                            </linearGradient>
+                            <linearGradient id="fgrad2" x1="28" y1="13" x2="40" y2="25" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#6366f1"/>
+                                <stop offset="1" stop-color="#38bdf8"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">Tech<span class="logo-accent">Store</span></span>
+                </a>
+                <p class="footer-desc">Компьютерная техника и комплектующие с гарантией качества. Подбираем технику под ваши задачи и бюджет.</p>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link" aria-label="VK">VK</a>
+                    <a href="#" class="footer-social-link" aria-label="Telegram">TG</a>
+                    <a href="#" class="footer-social-link" aria-label="WhatsApp">WA</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Навигация</h4>
+                <ul class="footer-links">
+                    <li><a href="/">Каталог</a></li>
+                    <li><a href="/?category=">Категории</a></li>
+                    <li><a href="/admin">Мои заказы</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Покупателям</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Оплата</a></li>
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Гарантия и возврат</a></li>
+                    <li><a href="#">Вопросы и ответы</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Контакты</h4>
+                <ul class="footer-contacts">
+                    <li>
+                        <span class="footer-contact-icon">📞</span>
+                        <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                    </li>
+                    <li>
+                        <span class="footer-contact-icon">✉️</span>
+                        <a href="mailto:info@techstore.ru">info@techstore.ru</a>
+                    </li>
+                    <li>
+                        <span class="footer-contact-icon">📍</span>
+                        <span>Москва, ул. Примерная, д. 1</span>
+                    </li>
+                    <li>
+                        <span class="footer-contact-icon">🕒</span>
+                        <span>Ежедневно: 9:00 — 21:00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <p>© 2025 TechStore — компьютерная техника. Все права защищены.</p>
+            <div class="footer-legal">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Публичная оферта</a>
+            </div>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

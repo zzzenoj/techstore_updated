@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}TechStore — Каталог техники{% endblock %}
+{% block content %}
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-text">
+            <h1>Лучшая техника<br><span class="accent">по лучшим ценам</span></h1>
+            <p>Ноутбуки, ПК, мониторы, комплектующие и периферия</p>
+        </div>
+    </div>
+</section>
+
+<section class="catalog-section">
+    <div class="container">
+        <!-- Search & Filter -->
+        <form class="filters" method="get" action="/">
+            <input
+                type="text"
+                name="search"
+                class="search-input"
+                placeholder="Поиск товаров..."
+                value="{{ search }}"
+            >
+            <div class="categories">
+                <a href="/" class="cat-btn {% if not selected %}active{% endif %}">Все</a>
+                {% for cat in categories %}
+                <a href="/?category={{ cat['category'] }}" class="cat-btn {% if selected == cat['category'] %}active{% endif %}">
+                    {{ cat['category'] }}
+                </a>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn-search">Найти</button>
+        </form>
+
+        <!-- Products Grid -->
+        {% if products %}
+        <div class="products-grid">
+            {% for p in products %}
+            <div class="product-card">
+                <div class="product-icon {{ p['image_url'] }}">
+                    {% if p['image_url'] == 'laptop' %}💻
+                    {% elif p['image_url'] == 'desktop' %}🖥️
+                    {% elif p['image_url'] == 'monitor' %}🖥
+                    {% elif p['image_url'] == 'keyboard' %}⌨️
+                    {% elif p['image_url'] == 'mouse' %}🖱️
+                    {% elif p['image_url'] == 'ssd' %}💾
+                    {% elif p['image_url'] == 'gpu' %}🎮
+                    {% elif p['image_url'] == 'headphones' %}🎧
+                    {% else %}📦
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <span class="product-category">{{ p['category'] }}</span>
+                    <h3 class="product-name">{{ p['name'] }}</h3>
+                    <p class="product-desc">{{ p['description'][:70] }}...</p>
+                    <div class="product-footer">
+                        <span class="product-price">{{ '{:,.0f}'.format(p['price']).replace(',', ' ') }} ₽</span>
+                        <span class="product-stock {% if p['stock'] < 3 %}low{% endif %}">
+                            {% if p['stock'] > 0 %}в наличии: {{ p['stock'] }} шт.{% else %}нет в наличии{% endif %}
+                        </span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="/product/{{ p['id'] }}" class="btn btn-outline">Подробнее</a>
+                        {% if p['stock'] > 0 %}
+                        <a href="/order/{{ p['id'] }}" class="btn btn-primary">Купить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <h3>Ничего не найдено</h3>
+            <p>Попробуйте другой запрос или сбросьте фильтры</p>
+            <a href="/" class="btn btn-primary">Все товары</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Заказ оформлен!{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="success-wrapper">
+        <div class="success-icon">✅</div>
+        <h1>Заказ оформлен!</h1>
+        <p>Спасибо, <strong>{{ name }}</strong>!</p>
+        <p>Товар <strong>«{{ product }}»</strong> успешно заказан.</p>
+        <p class="success-total">Сумма заказа: <strong>{{ '{:,.0f}'.format(total).replace(',', ' ') }} ₽</strong></p>
+        <a href="/" class="btn btn-primary">Вернуться в каталог</a>
+    </div>
+</div>
+{% endblock %}
